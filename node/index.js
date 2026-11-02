@@ -1,5 +1,6 @@
 import express from "express";
-
+import cors from "cors";
+import { fileURLToPath } from "node:url";
 import environments from "./src/api/config/environments.js";
 import connection from "./src/api/database/db.js";
 
@@ -7,24 +8,31 @@ const app = express();
 
 const puerto = environments.port;
 
-// 
-app.get("/", (req, res) => {
-    res.send("Hola mundo desde un servidor express.js papa!!!");
+
+app.use(cors()); // MIDDLEWARE
+app.use((req, res, next) => {
+    const fecha = new Date();
+    console.log(`[${fecha.toLocaleDateString()} ${fecha.toLocaleTimeString()}] ${req.method} ${req.url}`);
+    next(); // Pasa al siguiente middleware (si lo hay) o a la respuesta
 })
 
-// GET ALL
+app.use(express.json());
 
+
+// GET ALL
 app.get("/api/products", async (req, res) => {
-    const [rows, tables] = await connection.query("SELECT * FROM products");
-    console.log(rows);
+    const sql = "SELECT * FROM products";
+    const [rows, tables] = await connection.query(sql);
+    // console.log(rows);
+
     res.status(200).json({
         payload: rows
     });
 });
 
 
-// GET BY ID
 
+// GET BY ID
 app.get("/api/products/:id", async (req, res) => {
     const id = req.params.id;
     const [rows] = await connection.query(`SELECT * FROM products WHERE products.id = ${id}`);
