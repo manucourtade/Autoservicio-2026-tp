@@ -21,25 +21,36 @@ app.use(express.json());
 
 // GET ALL
 app.get("/api/products", async (req, res) => {
-    const sql = "SELECT * FROM products";
-    const [rows, tables] = await connection.query(sql);
-    // console.log(rows);
+    try {
+        const sql = "SELECT * FROM products";
+        const [rows, tables] = await connection.query(sql);
+        // console.log(rows);
+    
+        res.status(200).json({
+            payload: rows
+        });
 
-    res.status(200).json({
-        payload: rows
-    });
+    } catch (err) {
+        res.status(500).json({err})
+    }
 });
 
 
 
 // GET BY ID
 app.get("/api/products/:id", async (req, res) => {
-    const id = req.params.id;
-    const [rows] = await connection.query(`SELECT * FROM products WHERE products.id = ${id}`);
-    console.log(rows);
-    res.status(200).json({
-        payload: rows
-    })
+    try {
+        const id = req.params.id;
+        const [rows] = await connection.query(`SELECT * FROM products WHERE id = ?`, [id]);
+        console.log(rows);
+        res.status(200).json({
+            payload: rows
+        })
+    } catch (err) {
+        res.status(500).json({err})
+
+    }
+
 })
 
 
@@ -61,6 +72,22 @@ app.delete("/api/products/:id", async (req, res) => {
     }
 })
 
+// POST
+app.post("/api/products", async (req, res) => {
+    try {
+        const { category, image, name, price } = req.body;
+        const sql = "INSERT INTO products (name, image, category, price) VALUES (?, ?, ?, ?)";
+    
+        await connection.query(sql, [name, image, category, price]);
+    
+        res.status(201).json({
+            message: "Producto creado exitosamente"
+        });
+
+    } catch (err) {
+        res.status(500).json({err})
+    }
+});
 
 
 app.listen(puerto, () => {
