@@ -89,6 +89,25 @@ app.post("/api/products", async (req, res) => {
     }
 });
 
+//PUT BY ID
+app.put("/api/products/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const {category, image, name, price, active } = req.body;
+        const [result] =  await connection.query(`UPDATE products SET category = ?, image = ?, name = ?, price = ?, active = ? WHERE id = ${id}`, 
+            [category, image, name, price, active])
+        
+        res.status(200).json({
+            message: "Producto modificado con exito",
+        })
+
+    } catch (err) {
+        res.status(500).json({err})
+    }
+})
+
+// PATCH BY ID
+
 
 app.listen(puerto, () => {
     console.log(`Servidor corriendo en http://localhost:${puerto}`)
