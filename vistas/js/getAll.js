@@ -1,4 +1,4 @@
-const contenedorProductos = document.getElementById("contenedor-productos");
+const contenedorProductos = document.querySelector(".contenedor-productos");
 const urlBase = "http://localhost:3000";
 
 async function obtenerProductos() {
@@ -26,10 +26,15 @@ function renderizarProductos(array) {
     array.forEach(prod => {
         htmlProducto += `
             <div class="card-producto">
-                <img class="card-img" src="${prod.image}" alt="${prod.name}">
-                <h4>${prod.name}</h4>
-                <p>Id: ${prod.id}</p>
-                <p>$ ${prod.price}</p>
+                <div class="card-img">
+                    <img src="${prod.image}" alt="${prod.name}">
+                </div>
+
+                <div class="card-texto">
+                    <h4 class="card-name">${prod.name}</h4>
+                    <p class="card-id">Id: ${prod.id}</p>
+                    <p class="card-price">$ ${prod.price}</p>
+                </div>
             </div>
         `;
     });
