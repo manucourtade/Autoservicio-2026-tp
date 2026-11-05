@@ -1,8 +1,9 @@
-
-
 const modificarSeccion = document.querySelector('.modificarProduct-container');
-const contenedorProductos = document.getElementById("contenedor-productos");
 const urlBase = "http://localhost:3000";
+
+const mostrarError = (message, contenedor) => {
+    contenedor.innerHTML = `<p class = "error">${message}</p>`
+}
 
 
 
@@ -25,6 +26,7 @@ formId.addEventListener('submit', async e => {
         
     } catch (error) {
         console.error("Error al hacer la solicitud: ", error);
+        mostrarError("Fallo la conexion en el servidor", modificarSeccion);
     }
 });
 

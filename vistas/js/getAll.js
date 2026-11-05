@@ -1,5 +1,11 @@
+const mostrarError = (message, contenedor) => {
+    contenedor.innerHTML = `<p class = "error">${message}</p>`
+}
+
 const contenedorProductos = document.querySelector(".contenedor-productos");
 const urlBase = "http://localhost:3000";
+
+
 
 async function obtenerProductos() {
     try {
@@ -16,6 +22,7 @@ async function obtenerProductos() {
 
     } catch (error) {
         console.error("Error al hacer la solicitud: ", error);
+        //mostrarError("Fallo la conexion del servidor", contenedorProductos)
     }
 }
 
