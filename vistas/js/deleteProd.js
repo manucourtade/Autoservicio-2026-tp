@@ -1,4 +1,6 @@
-
+const mostrarError = (message, contenedor) => {
+    contenedor.innerHTML = `<p class = "error">${message}</p>`
+}
 const contenedorProductos = document.getElementById("contenedor-productos");
 const urlBase = "http://localhost:3000";
 
@@ -14,13 +16,14 @@ formId.addEventListener('submit', async e => {
         console.log(response);
         
         const data = await response.json();
-        
-        const producto = data.payload[0];
-        
-        renderizarProducto(producto);
+        if (!response.ok) {
+            mostrarError(data.message, contenedorProductos);
+        }        
+        renderizarProducto(data.payload[0]);
         
     } catch (error) {
         console.error("Error al hacer la solicitud: ", error);
+        mostrarError("Fallo la conexion en el servidor", contenedorProductos);
     }
 });
 
@@ -72,14 +75,18 @@ const confirmarOpcion = (id) => {
 
 const eliminarProducto = async (id) => {
     try {
-        const resposne = await fetch(`${urlBase}/api/products/${id}`, {
+        const response = await fetch(`${urlBase}/api/products/${id}`, {
             method: "DELETE"
         });
 
-        const data = await resposne.json();
+        const data = await response.json();
+        
+        if (!response.ok) {
+            mostrarError(data.message, contenedorProductos)
+            return;
+        }
 
         contenedorProductos.innerHTML = "";
-        alert(data.message);
 
     } catch (err) {
         console.log(err)

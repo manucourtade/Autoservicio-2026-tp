@@ -1,9 +1,9 @@
-const modificarSeccion = document.querySelector('.modificarProduct-container');
-const urlBase = "http://localhost:3000";
-
 const mostrarError = (message, contenedor) => {
     contenedor.innerHTML = `<p class = "error">${message}</p>`
 }
+
+const modificarSeccion = document.querySelector('.modificarProduct-container');
+const urlBase = "http://localhost:3000";
 
 
 
@@ -19,10 +19,11 @@ formId.addEventListener('submit', async e => {
         console.log(response);
         
         const data = await response.json();
+        if (!response.ok) {
+            mostrarError(data.message, modificarSeccion);
+        }
         
-        const producto = data.payload[0];
-        
-        renderizarProducto(producto);
+        renderizarProducto(data.payload[0]);
         
     } catch (error) {
         console.error("Error al hacer la solicitud: ", error);
@@ -53,7 +54,7 @@ const renderizarProducto = (producto) => {
     modificarProducto(producto);
     
 }
-const formularioModicificar = (producto) => {
+const formularioModificar = (producto) => {
     return `
                                 <form id="modifyProductForm">
     
@@ -91,7 +92,7 @@ const modificarProducto = (producto) => {
     
     btnModificar.addEventListener("click", () => {
         
-        modificarSeccion.innerHTML += formularioModicificar(producto);
+        modificarSeccion.innerHTML += formularioModificar(producto);
 
         const formModificar = document.getElementById('modifyProductForm');
 
@@ -100,6 +101,8 @@ const modificarProducto = (producto) => {
 
             const formData = new FormData(formModificar).entries();
             const formObj = Object.fromEntries(formData);
+            formObj.price = Number(formObj.price)
+            formObj.active = Number(formObj.active)
 
             try {
                 const response = await fetch(`${urlBase}/api/products/${producto.id}`, {
@@ -109,8 +112,12 @@ const modificarProducto = (producto) => {
                 });
 
                 const data = await response.json();
-                console.log(data.message);
-                alert(data.message);
+                console.log(data)
+                if (!response.ok) {
+                mostrarError(data.message, modificarSeccion);
+                return;
+                }
+            
                 modificarSeccion.innerHTML = "";
             } catch (error) {
                 console.error("Error al hacer la solicitud: ", error);

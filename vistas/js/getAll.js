@@ -13,16 +13,17 @@ async function obtenerProductos() {
         console.log(response);
 
         const data = await response.json();
-
+        if (!response.ok) {
+            mostrarError(data.message, contenedorProductos);
+        }
         // En data tenemos payload: arrayDeObjetos
-        const productos = data.payload;
-        console.table(productos);
+        console.table(data.payload);
 
-        renderizarProductos(productos);
+        renderizarProductos(data.payload);
 
     } catch (error) {
         console.error("Error al hacer la solicitud: ", error);
-        //mostrarError("Fallo la conexion del servidor", contenedorProductos)
+        mostrarError("Fallo la conexion del servidor", contenedorProductos)
     }
 }
 
