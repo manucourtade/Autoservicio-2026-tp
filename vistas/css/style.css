@@ -95,6 +95,74 @@ h1 {
     font-family: var(--font-dm-sans);
     margin-bottom: 20px;
 }
+.contenedor-form {
+    display: flex;
+    width: 90%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    padding-left: 30px;
+    position: relative;
+}
+
+.contenedor-crear {
+    width: 60%;
+}
+
+.btn-crear {
+    border: 1px solid rgb(26, 95, 26);
+    background-color: rgb(16, 141, 16);
+    color: white;
+    font-family: var(--font-dm-sans);
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-radius: 5px;
+    padding: 5px 35px;
+    transition: all .3s ease;
+}
+.btn-crear:hover {
+    background-color: green;
+    cursor: pointer;
+    border-color: white;
+}
+
+.span1-crear {
+    font-size: 50px;
+}
+
+.span2-crear {
+    font-size: 18px;
+}
+
+
+#formIdName {
+    width: 30%;
+    position: absolute;
+    right: 0;
+}
+
+
+#prod {
+    padding: 13px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #a1a1a0;
+    transition: all .3s ease;
+}
+
+#prod:hover {
+    background-color: #f1f2f3;
+}
+
+#prod:focus {
+    border: 1px solid var(--color-btn);
+    outline: none;
+}
+
 .contenedor-productos {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -102,20 +170,20 @@ h1 {
     margin: 0 auto;
     gap: 7px;
 }
+
 .card-producto {
     border: 1px solid rgba(0, 0, 0, 0.2);
     background-color: #f4efe37a;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 20px;
+    padding: 20px;
 }
 
 .card-img {
     width: 100%;
     height: 60%;
     border-bottom: 1px solid rgba(0,0,0,.2);
-
 }
 
 .card-texto {
@@ -147,6 +215,7 @@ h1 {
     object-fit: cover;
     width: 100%;
     height: 100%;
+    border-radius: 5px;
 }
 
 /* BOTONES EDITAR ELIMINAR */
@@ -162,6 +231,7 @@ h1 {
     cursor: pointer;
     transition: all .3s ease;
     font-size: 17px;
+    font-family: var(--font-dm-sans);
 }
 
 .btn-editar {

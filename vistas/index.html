@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/getAll.js" defer></script>
+    <script src="js/get.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <title>Document</title>
@@ -21,7 +21,6 @@
         <nav class="nav-bar">
             <ul>
                 <li class="nav-item"><a href="index.html">Ver productos</a></li>
-                <li class="nav-item"><a href="get.html">Encontrar producto</a></li>
                 <li class="nav-item"><a href="post.html">Nuevo producto</a></li>
                 <li class="nav-item"><a href="put.html">Modificar producto</a></li>
                 <li class="nav-item"><a href="delete.html">Eliminar producto</a></li>
@@ -31,8 +30,26 @@
 
     <main>
         <h1>Lista de productos - Bebidas y Snacks</h1>
+        
+        <section class="contenedor-form">
+            
+            <div class="contenedor-crear">
+                <button type="button" class="btn-crear"><span class="span1-crear">+</span> <span class="span2-crear">Crear producto</span></button>
+            </div>
+
+            <form id="formPost">
+
+            </form>
+
+            <form id="formIdName">
+                <input type="text" name="prod" id="prod" min="1" placeholder="Buscar producto por ID" required>
+            </form>
+        </section>
+
+
         <section class="contenedor-productos">
         </section>
+        
     </main>
 
     <footer>
