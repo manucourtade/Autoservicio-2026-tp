@@ -11,14 +11,14 @@ async function obtenerProductos() {
     try {
         const response = await fetch(`${urlBase}/api/products`);
         console.log(response);
-
+        
         const data = await response.json();
         if (!response.ok) {
             mostrarError(data.message, contenedorProductos);
         }
         // En data tenemos payload: arrayDeObjetos
         console.table(data.payload);
-
+        
         renderizarProductos(data.payload);
 
     } catch (error) {
@@ -43,11 +43,17 @@ function renderizarProductos(array) {
                     <p class="card-id">Id: ${prod.id}</p>
                     <p class="card-price">$ ${prod.price}</p>
                 </div>
+                
+                <div class ="contenedor-botones">
+                    <a href="put.html" class="btn btn-editar">Editar</a>
+                    <a href="delete.html" class="btn btn-eliminar">Eliminar</a>
+                </div>
             </div>
         `;
     });
 
-    contenedorProductos.innerHTML = htmlProducto;
+    contenedorProductos.innerHTML += htmlProducto;
 }
+
 
 obtenerProductos();

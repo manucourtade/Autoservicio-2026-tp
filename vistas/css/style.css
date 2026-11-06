@@ -49,7 +49,7 @@ header {
 }
 
 .nav-item {
-    margin-right: 30px;
+    margin-right: 40px;
 }
 
 .nav-item a {
@@ -147,5 +147,44 @@ h1 {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+/* BOTONES EDITAR ELIMINAR */
+.contenedor-botones {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn {
+    padding: 15px 35px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s ease;
+    font-size: 17px;
+}
+
+.btn-editar {
+    background: #EFF6FF;
+    color: #1D4ED8;
+    border: 1px solid #BFDBFE;
+}
+
+.btn-editar:hover {
+    background: #DBEAFE;
+    color: #1E40AF;
+    border-color: #93C5FD;
+}
+
+.btn-eliminar {
+    background: #FEF2F2;
+    color: #B91C1C;
+    border: 1px solid #FECACA;
+}
+
+.btn-eliminar:hover {
+    background: #FEE2E2;
+    color: #991B1B;
+    border-color: #FCA5A5;
 }
 
