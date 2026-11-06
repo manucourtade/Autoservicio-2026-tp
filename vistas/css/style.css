@@ -121,7 +121,7 @@ h1 {
     justify-content: space-between;
     gap: 20px;
     border-radius: 5px;
-    padding: 5px 35px;
+    padding: 0 20px;
     transition: all .3s ease;
 }
 .btn-crear:hover {
